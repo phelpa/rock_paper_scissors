@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="UTF-8">
+  <title>Rock, Paper and Scissors Game</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  
+<div class="container">
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+</div>
+ 
+<div id="result">No result</div>
+<div id="score">No result</div>
+<div id="winner">No result</div> 
+     
+<script>
+	
+var computerScore = 0; 
+var playerScore = 0;
+	
+function computerPlay(){
+    
+    let randomNum = Math.floor((Math.random() * 3) + 1);  
+    
+    if (randomNum == 1) {
+       var compChoice = 'rock';
+    } else if (randomNum == 2){
+        var compChoice = 'paper';
+    } else {
+       var compChoice = 'scissors';
+    }
+
+    return compChoice;
+}
+    
+    
+
+
+function playRound(playerSelection, computerMove ) {
+	
+var result = document.querySelector("#result");
+var score = document.querySelector("#score");
+var winner = document.querySelector("#winner");
+    
+    
+  switch(playerSelection) {
+    
+    case 'rock':
+
+      if (computerMove === 'paper') {
+		  computerScore++;  
+        result.textContent = 'Paper beats rock! You lose that round.';
+        score.textContent = playerScore + " to " + computerScore;       
+      }
+      else if (computerMove === 'scissors') {
+		  playerScore++;
+         result.textContent = 'Rock beats scissors! You win that round.';
+        score.textContent = playerScore + " to " + computerScore;
+        
+      }
+      else {
+         result.textContent = 'It\'s a draw!';
+      }
+      break;
+    case 'paper':
+      if (computerMove === 'scissors') {
+		  computerScore++;
+         result.textContent = 'Scissors beats paper! You lose that round.';
+         score.textContent = playerScore + " to " + computerScore;
+        
+      }
+      else if (computerMove === 'rock') {
+		  playerScore++;
+         result.textContent = 'Paper beats rock! You win that round.';
+         score.textContent = playerScore + " to " + computerScore;
+        
+      }
+      else {
+         result.textContent = 'It\'s a draw!';
+      }
+      break;
+    case 'scissors':
+      if (computerMove === 'rock') {
+		   computerScore++;
+         result.textContent = 'Rock beats scissors! You lose that round.';
+         score.textContent = playerScore + " to " + computerScore;
+       
+      }
+      else if (computerMove === 'paper') {
+		  playerScore++;
+         result.textContent = 'Scissors beats paper! You win that round.';
+         score.textContent = playerScore + " to " + computerScore;
+        
+      }
+      else {
+         result.textContent = 'It\'s a draw!';
+      }
+    
+
+  }
+  
+  if (computerScore === 5) {
+  winner.textContent = "Computer wins";
+  
+  } else if (playerScore === 5) {
+   winner.textContent = "Player wins";
+  }
+   
+  
+}
+             
+  
+var rockButton = document.querySelector('#rock');
+rockButton.addEventListener("click", function(){
+  playRound('rock', computerPlay())
+});
+
+var paperButton = document.querySelector("#paper");
+paperButton.addEventListener("click", function(){
+  playRound('paper', computerPlay())
+});
+  
+var scissorsButton = document.querySelector("#scissors");
+scissorsButton.addEventListener("click", function(){
+  playRound('scissors', computerPlay())
+});
+  
+  
+
+  
+</script>       
+  
+</body>
+</html>
+
+
+
